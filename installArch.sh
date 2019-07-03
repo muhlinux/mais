@@ -69,7 +69,7 @@ printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
 printf "Installation completed! \nYou can safely reboot now, and configure your new Arch installation.\n"
 read -r -p "Reboot? [Y/n] " prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" || $prompt == "" ]]; then
-    echo "Rebooting"
+    umount -R /mnt && reboot
   else 
     echo "Done!"; exit 0
 fi
