@@ -3,11 +3,9 @@
 # by muhlinux
 # License: GPLv3
 
-### PRE-INSTALLATION ###
 echo ":: Verifying internet connection..."
 if [[ "$(ping -c 1 archlinux.org | grep '100% packet loss' )" != "" ]]; then
-    echo "ERROR: No internet."
-    exit 1
+    echo "ERROR: No internet."; exit 1
 fi
 
 echo ":: Updating the system clock..."
@@ -18,7 +16,6 @@ disk=$(fdisk -l | head -1 | cut -d ' ' -f2- | cut -d ':' -f1)
 efiPartition="${disk}1"
 rootPartition="${disk}2"
 
-# partitioning using parted
 # refer to https://wiki.archlinux.org/index.php/Parted#UEFI/GPT_examples
 parted "$disk" \
     mklabel gpt \
@@ -33,9 +30,8 @@ echo ":: Mounting the file systems..."
 mount "${rootPartition}" /mnt && mkdir /mnt/boot
 mount "${efiPartition}" /mnt/boot
 
-### INSTALLATION ###
 echo ":: Updating mirrors..."
-# to rankmirrors, 'pacman-contrib' is needed.
+# to rank mirrors, 'pacman-contrib' is needed.
 pacman -Sy pacman-contrib --noconfirm
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 
@@ -66,11 +62,14 @@ arch_conf=("title   Arch Linux" \
            "initrd  /initramfs-linux.img" \
            "options root=UUID=${UUID} rw")
 printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
+
+echo ":: Setup root password"
+passwd
+
 printf "Installation completed! \nYou can safely reboot now, and configure your new Arch installation.\n"
 read -r -p "Reboot? [Y/n] " prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" || $prompt == "" ]]; then
     umount -R /mnt && reboot
   else 
     echo "Done!"; exit 0
-fi
-exit 0
+fi; exit 0
