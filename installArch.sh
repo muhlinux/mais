@@ -58,9 +58,6 @@ arch_conf=("title   Arch Linux" \
            "options root=UUID=${UUID} rw")
 printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
 
-echo ":: Setup root password"
-passwd
-
 printf "Installation completed! \nYou can safely reboot now, and configure your new Arch installation.\n"
 read -r -p "Reboot? [Y/n] " prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" || $prompt == "" ]]; then
