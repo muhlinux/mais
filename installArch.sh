@@ -3,11 +3,6 @@
 # by muhlinux
 # License: GPLv3
 
-echo ":: Verifying internet connection..."
-if [[ "$(ping -c 1 archlinux.org | grep '100% packet loss' )" != "" ]]; then
-    echo "ERROR: No internet."; exit 1
-fi
-
 echo ":: Updating the system clock..."
 timedatectl set-ntp true
 
