@@ -35,9 +35,5 @@ printf '%s\n' "${hosts[@]}" > /etc/hosts && echo "$HOSTNAME" > /etc/hostname
 systemctl enable dhcpcd
 
 printf "Configuration completed! \nYou can safely reboot now.\n"
-read -r -p "Reboot? [Y/n] " prompt
-if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" || $prompt == "" ]]; then
-    echo "Rebooting" && reboot
-  else 
-    echo "Done!"; exit 0
-fi; exit 0
+printf "Exit the chroot environment by typing exit or pressing Ctrl+d.\nThen run umount -R /mnt && reboot\n"
+exit 0
