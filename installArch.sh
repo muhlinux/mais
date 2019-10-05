@@ -3,6 +3,12 @@
 # by muhlinux
 # License: GPLv3
 
+echo ":: Verifying boot mode..."
+if [ ! -d "ls /sys/firmware/efi/efivars" ]; then
+    echo "Not booted in UEFI mode!"
+    exit 1
+fi
+
 echo ":: Updating the system clock..."
 timedatectl set-ntp true
 
@@ -26,7 +32,7 @@ mount "${rootPartition}" /mnt && mkdir /mnt/boot
 mount "${efiPartition}" /mnt/boot
 
 echo ":: Updating mirrors..."
-# to rank mirrors, 'pacman-contrib' is needed.
+# to rankmirrors, 'pacman-contrib' is needed.
 pacman -Sy pacman-contrib --noconfirm
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 
@@ -39,6 +45,9 @@ pacman -Syy
 
 echo ":: Installing base packages.."
 pacstrap /mnt
+
+echo ":: Generating fstab..."
+genfstab -U /mnt >> /mnt/etc/fstab
 
 echo ":: Installing systemd-boot..."
 bootctl install --path=/mnt/boot
@@ -58,10 +67,12 @@ arch_conf=("title   Arch Linux" \
            "options root=UUID=${UUID} rw")
 printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
 
-printf "Installation completed! \nYou can safely reboot now, and configure your new Arch installation.\n"
-read -r -p "Reboot? [Y/n] " prompt
+printf "Installation completed! \nReady to run configuration script.\n"
+read -r -p "Run configuration script? [Y/n] " prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" || $prompt == "" ]]; then
-    umount -R /mnt && reboot
+    curl -O https://raw.githubusercontent.com/muhlinux/mais/master/config.sh
+    arch-chroot /mnt bash config.sh
   else 
-    echo "Done!"; exit 0
-fi; exit 0
+    echo "Exiting!"; exit 0
+fi
+exit 0
