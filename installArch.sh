@@ -3,12 +3,6 @@
 # by muhlinux
 # License: GPLv3
 
-echo ":: Verifying boot mode..."
-if [ ! -d "ls /sys/firmware/efi/efivars" ]; then
-    echo "Not booted in UEFI mode!"
-    exit 1
-fi
-
 echo ":: Updating the system clock..."
 timedatectl set-ntp true
 
