@@ -61,11 +61,8 @@ arch_conf=("title   Arch Linux" \
            "options root=UUID=${UUID} rw")
 printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
 
-printf "Installation completed! \nReady to run configuration script.\n"
-read -r -p "Run configuration script? [Y/n] " prompt
-if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" || $prompt == "" ]]; then
-    curl -O https://raw.githubusercontent.com/muhlinux/mais/master/config.sh
-    arch-chroot /mnt bash config.sh
-  else 
-    echo "Exiting!"; exit 0
-fi; exit 0
+echo "Installation completed!"
+echo 'run "arch-chroot"' 
+echo 'then "curl -O https://raw.githubusercontent.com/muhlinux/mais/master/config.sh"'
+echo 'and finally "bash config.sh"'
+exit 0
