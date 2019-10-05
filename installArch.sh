@@ -74,5 +74,4 @@ if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" |
     arch-chroot /mnt bash config.sh
   else 
     echo "Exiting!"; exit 0
-fi
-exit 0
+fi; exit 0
