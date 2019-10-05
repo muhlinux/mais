@@ -40,5 +40,4 @@ if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" |
     echo "Rebooting" && reboot
   else 
     echo "Done!"; exit 0
-fi
-exit 0
+fi; exit 0
