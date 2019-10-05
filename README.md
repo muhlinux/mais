@@ -7,5 +7,5 @@ Installs Arch on UEFI and configures systemd-boot
 
 from a live environment
 
-    curl -O https://raw.githubusercontent.com/muhlinux/mais/master/installArch.sh
+    curl -O https://raw.githubusercontent.com/muhlinux/mais/master/installer.sh
     bash installArch.sh
