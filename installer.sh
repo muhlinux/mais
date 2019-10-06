@@ -38,7 +38,7 @@ curl -s "https://www.archlinux.org/mirrorlist/?country=SE&country=DK&protocol=ht
 pacman -Syy 
 
 echo ":: Installing base packages.."
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel linux
 
 echo ":: Generating fstab..."
 genfstab -U /mnt >> /mnt/etc/fstab
