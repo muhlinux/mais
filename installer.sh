@@ -57,6 +57,7 @@ printf '%s\n' "${loader_conf[@]}" > /mnt/boot/loader/loader.conf
 UUID=$(blkid -s UUID -o value "${rootPartition}")
 arch_conf=("title   Arch Linux" \
            "linux   /vmlinuz-linux" \
+           "initrd  /intel-ucode.img" \
            "initrd  /initramfs-linux.img" \
            "options root=UUID=${UUID} rw")
 printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
