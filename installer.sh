@@ -63,7 +63,7 @@ arch_conf=("title   Arch Linux" \
 printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
 
 echo "Installation completed!"
-echo 'run "arch-chroot"' 
+echo 'run "arch-chroot /mnt"' 
 echo 'then "curl -O https://raw.githubusercontent.com/muhlinux/mais/master/config.sh"'
 echo 'and finally "bash config.sh"'
 exit 0
