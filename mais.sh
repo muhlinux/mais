@@ -62,8 +62,9 @@ arch_conf=("title   Arch Linux" \
            "options root=UUID=${UUID} rw")
 printf '%s\n' "${arch_conf[@]}" > /mnt/boot/loader/entries/arch.conf
 
+curl -s https://raw.githubusercontent.com/muhlinux/mais/master/config.sh -o /mnt/config.sh
+
 echo "Installation completed!"
 echo 'run "arch-chroot /mnt"' 
-echo 'then "curl -O https://raw.githubusercontent.com/muhlinux/mais/master/config.sh"'
-echo 'and finally "bash config.sh"'
+echo 'then "bash config.sh"'
 exit 0
