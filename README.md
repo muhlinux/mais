@@ -12,6 +12,5 @@ from a live environment
     
 after the installer finishes
 
-    arch-chroot
-    curl -O https://raw.githubusercontent.com/muhlinux/mais/master/config.sh
+    arch-chroot /mnt
     bash config.sh
