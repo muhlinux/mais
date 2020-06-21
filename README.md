@@ -7,12 +7,12 @@ Installs Arch on UEFI and configures systemd-boot
 
 from a live environment
 
-    curl -O https://raw.githubusercontent.com/muhlinux/mais/master/installer.sh
+    curl -O https://raw.githubusercontent.com/muhlinux/mais/master/mais.sh
     bash mais.sh
 or
 
-    curl -LO https://is.gd/izoped
-    bash izoped
+    curl -LO https://is.gd/areyec
+    bash areyec
     
 after the installer finishes
 
