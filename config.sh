@@ -34,6 +34,10 @@ hosts=("127.0.0.1   localhost"
 printf '%s\n' "${hosts[@]}" > /etc/hosts && echo "$HOSTNAME" > /etc/hostname
 systemctl enable dhcpcd
 
+echo "Enter root password"
+passwd
+
+
 printf "Configuration completed! \nYou can safely reboot now.\n"
 printf "Exit the chroot environment by typing exit or pressing Ctrl+d.\nThen run umount -R /mnt && reboot\n"
 exit 0
